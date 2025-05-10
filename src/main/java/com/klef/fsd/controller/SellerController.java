@@ -130,4 +130,21 @@ public class SellerController {
 					.body(List.of(Map.of("error", "Failed to fetch sales data: " + e.getMessage())));
 		}
 	}
+@PostMapping("/sforgot-password")
+  public ResponseEntity<String> forgotPassword(@RequestParam String email) {
+    String result = sellerService.generateResetToken(email);
+    if (result.equals("Seller not found!")) {
+      return ResponseEntity.status(HttpStatus.NOT_FOUND).body(result);
+    }
+    return ResponseEntity.ok(result);
+  }
+
+  @PostMapping("/sreset-password")
+  public ResponseEntity<String> resetPassword(@RequestParam String token, @RequestParam String newPassword) {
+    String result = sellerService.resetPassword(token, newPassword);
+    if (result.equals("Invalid token!")) {
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
+    }
+    return ResponseEntity.ok(result);
+  }
 }
