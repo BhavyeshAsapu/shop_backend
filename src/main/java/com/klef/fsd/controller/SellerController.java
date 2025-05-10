@@ -46,9 +46,49 @@ public class SellerController {
 		}
 	}
 
-	// ... (other existing endpoints unchanged)
+	
+  @GetMapping("/pending")
+  public ResponseEntity<List<Seller>> viewPendingSellers() {
+    List<Seller> list = sellerService.viewPendingSellers();
+    return ResponseEntity.ok(list);
+  }
 
-	// New endpoints for Seller Dashboard
+  @PutMapping("/approve/{id}")
+  public ResponseEntity<String> approveSeller(@PathVariable("id") int id) {
+    String result = sellerService.approveSeller(id);
+    return ResponseEntity.ok(result);
+  }
+
+  @PutMapping("/reject/{id}")
+  public ResponseEntity<String> rejectSeller(@PathVariable("id") int id) {
+    String result = sellerService.rejectSeller(id);
+    return ResponseEntity.ok(result);
+  }
+
+  @DeleteMapping("/delete")
+  public ResponseEntity<String> deleteSeller(@RequestParam("id") int id) {
+    String result = sellerService.deleteSeller(id);
+    return ResponseEntity.ok(result);
+  }
+
+  @PutMapping("/updateseller")
+  public ResponseEntity<String> sellerupdateprofile(@RequestBody Seller seller) {
+    try {
+      System.out.println(seller.toString());
+      String output = sellerService.updateSellerProfile(seller);
+      return ResponseEntity.ok(output);
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+      return ResponseEntity.status(500).body("Failed to Update Seller ... !!");
+    }
+  }
+
+  @GetMapping("/viewallsellers")
+  public List<Seller> viewAllSellers() {
+
+    return sellerService.viewAllSellers();
+
+  }
 	@GetMapping("/{sellerId}/products/count")
 	public ResponseEntity<Map<?, ?>> getTotalProducts(@PathVariable("sellerId") int sellerId) {
 		try {
