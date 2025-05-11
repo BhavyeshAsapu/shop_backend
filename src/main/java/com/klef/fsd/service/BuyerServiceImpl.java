@@ -43,7 +43,7 @@ public class BuyerServiceImpl implements BuyerService {
 	    buyer.setResetToken(resetToken);
 	    buyerRepository.save(buyer);
 
-	    String resetLink = "http://localhost:5173/reset-password?token=" + resetToken;
+	    String resetLink = "https://sdpfrontend-rr9e.onrender.com/reset-password?token=" + resetToken;
 
 	    EmailDetails mail = new EmailDetails();
 	    mail.setRecipient(email);
