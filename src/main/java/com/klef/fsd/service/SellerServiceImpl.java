@@ -135,7 +135,7 @@ public class SellerServiceImpl implements SellerService {
 		seller.setResetToken(resetToken);
 		sellerRepository.save(seller);
 
-		String resetLink = "http://localhost:5173/sreset-password?token=" + resetToken;
+		String resetLink = "https://sdpfrontend-rr9e.onrender.com/sreset-password?token=" + resetToken;
 
 		EmailDetails mail = new EmailDetails();
 		mail.setRecipient(email);
