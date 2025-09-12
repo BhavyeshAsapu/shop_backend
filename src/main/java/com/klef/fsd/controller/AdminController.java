@@ -1,15 +1,23 @@
 package com.klef.fsd.controller;
 
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.klef.fsd.model.Admin;
 import com.klef.fsd.model.Buyer;
 import com.klef.fsd.model.Seller;
 import com.klef.fsd.service.AdminService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/admin")
@@ -18,6 +26,8 @@ public class AdminController {
 
 	@Autowired
 	private AdminService service;
+//	@Autowired
+//	private SellerService sellerservice;
 
 	// Existing endpoints (unchanged)
 	@PostMapping("/checkadminlogin")
@@ -56,15 +66,36 @@ public class AdminController {
 		return ResponseEntity.ok(buyers);
 	}
 
-	@PostMapping("/approveseller")
-	public ResponseEntity<String> approveSeller(@RequestBody int sellerId) {
-		try {
-			String result = service.approveSeller(sellerId);
-			return ResponseEntity.ok(result);
-		} catch (Exception e) {
-			return ResponseEntity.status(500).body("Approval Failed: " + e.getMessage());
-		}
+//	@PostMapping("/approveseller")
+//	public ResponseEntity<String> approveSeller(@RequestBody int sellerId) {
+//		try {
+//			String result = service.approveSeller(sellerId);
+//			return ResponseEntity.ok(result);
+//		} catch (Exception e) {
+//			return ResponseEntity.status(500).body("Approval Failed: " + e.getMessage());
+//		}
+//	}
+//	@PostMapping("/approveseller")
+//	public ResponseEntity<String> approveSeller(@RequestBody Map<String, Integer> body) {
+//	    try {
+//	        int sellerId = body.get("id");
+//	        String result = service.approveSeller(sellerId);
+//	        return ResponseEntity.ok(result);
+//	    } catch (Exception e) {
+//	        return ResponseEntity.status(500).body("Approval Failed: " + e.getMessage());
+//	    }
+//	}
+	@PostMapping("/approveseller/{id}")
+	public ResponseEntity<String> approveSeller(@PathVariable("id") int sellerId) {
+	    try {
+	        String result = service.approveSeller(sellerId);
+	        return ResponseEntity.ok(result);
+	    } catch (Exception e) {
+	        return ResponseEntity.status(500).body("Approval Failed: " + e.getMessage());
+	    }
 	}
+
+	
 
 	// New endpoints for Admin Dashboard
 	@GetMapping("/sellers/count")

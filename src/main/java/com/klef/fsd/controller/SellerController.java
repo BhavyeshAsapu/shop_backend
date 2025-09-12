@@ -55,12 +55,12 @@ public class SellerController {
     List<Seller> list = sellerService.viewPendingSellers();
     return ResponseEntity.ok(list);
   }
-
-  @PutMapping("/approve/{id}")
-  public ResponseEntity<String> approveSeller(@PathVariable("id") int id) {
-    String result = sellerService.approveSeller(id);
-    return ResponseEntity.ok(result);
-  }
+//
+//  @PutMapping("/approve/{id}")
+//  public ResponseEntity<String> approveSeller(@PathVariable("id") int id) {
+//    String result = sellerService.approveSeller(id);
+//    return ResponseEntity.ok(result);
+//  }
 
   @PutMapping("/reject/{id}")
   public ResponseEntity<String> rejectSeller(@PathVariable("id") int id) {

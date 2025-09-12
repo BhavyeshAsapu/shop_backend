@@ -8,4 +8,5 @@ import com.klef.fsd.model.Admin;
 @Repository
 public interface AdminRepository extends JpaRepository<Admin, String> {
 	public Admin findByUsernameAndPassword(String username, String password);
+	
 }
