@@ -6,7 +6,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @ComponentScan(basePackages = "com.klef.fsd")
 @SpringBootApplication
-public class SdpProjectApplication {
+public class SdpProjectApplication extends SpringBootServletInitializer{
 
 	public static void main(String[] args) {
 		SpringApplication.run(SdpProjectApplication.class, args);
